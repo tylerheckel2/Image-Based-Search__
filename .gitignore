@@ -1,0 +1,31 @@
+
+# ---- Python ----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# ---- Virtual environments ----
+venv/
+backend/venv/
+.env/
+
+# ---- Node/React ----
+frontend/image-search-frontend/node_modules/
+
+# ---- Build artifacts / caches ----
+dist/
+build/
+*.log
+
+# ---- OS junk ----
+.DS_Store
+Thumbs.db
+
+# ---- Data / indexes (choose one: either ignore, or LFS) ----
+# If you intend to store only small sample images, keep them tracked.
+# If your dataset is large, ignore it and/or use LFS.
+data/images/
+backend/image_index.faiss
+backend/metadata.json
