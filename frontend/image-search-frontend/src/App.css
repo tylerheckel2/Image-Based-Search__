@@ -1,69 +1,191 @@
 
-/* src/App.css */
+/* Global container */
 .container {
-  max-width: 900px;
-  margin: 24px auto;
-  padding: 0 16px;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  max-width: 960px;
+  margin: 32px auto;
+  padding: 0 20px;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  color: #333;
 }
 
+/* Heading */
 h1 {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2c3e50;
 }
 
+/* Controls card */
 .controls {
   display: flex;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 16px;
   align-items: center;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   margin-bottom: 16px;
 }
 
-.controls input[type="number"] {
-  width: 80px;
+.controls input[type="file"] {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.controls input[type="number"],
+.controls select {
   margin-left: 8px;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
 }
 
-.preview img {
-  max-width: 300px;
+.controls label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+}
+
+.controls button {
+  padding: 8px 16px;
+  background: #3657ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.controls button:hover {
+  background: #2745d3;
+}
+
+/* Info box */
+.info-box {
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: #f4f6ff;
+  border: 1px solid #d6dcff;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  font-size: 14px;
+  color: #2c3e50;
+  line-height: 1.4;
 }
 
+/* Preview image */
+.preview img {
+  max-width: 280px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-top: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Error message */
 .error {
-  margin: 12px 0;
-  padding: 10px;
+  margin: 16px 0;
+  padding: 12px;
   background: #ffe9e9;
   color: #b10000;
   border: 1px solid #ffbcbc;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-size: 14px;
 }
 
+/* Results grid */
 .results {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 12px;
-  margin-top: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
 }
 
 .card {
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
   overflow: hidden;
   background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .card img {
   width: 100%;
-  height: 140px;
+  height: 150px;
   object-fit: cover;
 }
 
 .card .meta {
-  padding: 8px;
+  padding: 10px;
   font-size: 14px;
 }
 
 .filename {
   font-weight: 600;
   margin-bottom: 4px;
+  color: #2c3e50;
+}
+
+.distance,
+.rank {
+  font-size: 13px;
+  color: #555;
+}
+
+/* Metric label and help icon */
+.metric-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.help-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 50%;
+  background: #eef3ff;
+  color: #3657ff;
+  border: 1px solid #cfd9ff;
+  cursor: help;
+}
+
+.help-popover {
+  display: none;
+  position: absolute;
+  top: 28px;
+  left: 0;
+  max-width: 380px;
+  z-index: 10;
+  background: #ffffff;
+  color: #222;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.metric-label:hover .help-popover {
+  display: block;
 }

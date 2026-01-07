@@ -9,6 +9,7 @@ const API_BASE = process.env.REACT_APP_API_BASE || 'http://127.0.0.1:8000';
 function App() {
   const [file, setFile] = useState(null);
   const [topK, setTopK] = useState(5);
+  const [metric, setMetric] = useState('l2'); // 'l2' or 'cosine'
   const [results, setResults] = useState([]);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -35,7 +36,7 @@ function App() {
     try {
       const form = new FormData();
       form.append('file', file);
-      const url = `${API_BASE}/search?k=${topK}`;
+      const url = `${API_BASE}/search?k=${topK}&metric=${metric}`;
       const res = await axios.post(url, form);
       setResults(res.data.results || []);
     } catch (err) {
@@ -74,10 +75,45 @@ function App() {
             onChange={(e) => setTopK(parseInt(e.target.value, 10))}
           />
         </label>
+
+        <label className="metric-label">
+          Metric:
+          <select value={metric} onChange={(e) => setMetric(e.target.value)}>
+            <option value="l2">L2</option>
+            <option value="cosine">Cosine</option>
+          </select>
+
+          {/* Small help icon / tooltip */}
+          {/* <span className="help-icon" title="Click to learn more">?</span> */}
+          {/* <div className="help-popover">
+            <strong>What’s the difference?</strong>
+            <ul>
+              <li>
+                <strong>L2 (Euclidean distance)</strong> measures the straight‑line distance
+                between feature vectors. Good when the <em>magnitude</em> of features matters.
+              </li>
+              <li>
+                <strong>Cosine</strong> measures the <em>angle</em> between feature vectors (orientation),
+                ignoring magnitude. Good for comparing overall <em>pattern/shape</em> of features.
+              </li>
+            </ul>
+            <p style={{ marginTop: 8 }}>
+              <strong>Rule of thumb:</strong> Try <code>cosine</code> for general image similarity (robust to lighting/scale).  
+              Use <code>L2</code> if absolute feature values are meaningful for your dataset.
+            </p>
+          </div> */}
+        </label>
+
         <button onClick={onSearch} disabled={loading}>
           {loading ? 'Searching...' : 'Search'}
         </button>
       </div>
+
+      <div className="info-box">
+        <strong>Metric guide:</strong> L2 compares raw distances between embeddings; Cosine compares their orientation.  
+        Cosine is often more stable for images because it focuses on feature direction, not magnitude.
+      </div>
+
 
       {previewUrl && (
         <div className="preview">
